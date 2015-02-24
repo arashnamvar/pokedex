@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokemon</title>
+	<script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// $.get("http://pokeapi.co/api/v1/pokemon/1/", function(res) {
+			// 	res.types[0].name;
+			// 	res.types[1].name
+			// }, "json");
+
+		$(".pokemon").on("click", "img", function(){
+			altnum = $(this).attr("alt-num");
+			url = "http://pokeapi.co/api/v1/pokemon/" + altnum + "/";
+			$.get(url, function(res){	
+
+			$(".name").html(res.name);
+
+			$(".name").append("<img style='display:block' src ='http://pokeapi.co/media/img/" + altnum+ ".png'>");	
+
+			for (var i=0;i<res.types.length;i++){
+				if(res.types[i].name){
+					$("ul").html("<li>" + res.types[i].name + "</li>");
+				}
+			}
+
+			$(".height").html(res.height);
+
+			$(".weight").html(res.weight);
+
+
+				}, "json");
+			})
+
+
+		for(var i=1;i<=151;i++){
+			var img = "http://pokeapi.co/media/img/" + i + ".png";
+			$(".pokemon").append("<img src=" + img + " alt-num=" + i + "></img>");
+		};
+		});
+	</script>
+	<style type="text/css">
+	img {
+		display: inline-block;
+	}
+
+	.pokemon {
+		width: 69%;
+		display: inline-block;
+	}
+
+	.pdex {
+		width: 29%;
+		border: 2px red solid;
+		margin-left: 5px;
+		height: 500px;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+
+	</style>
+</head>
+
+	<h1>Pokemon</h1>
+<body>
+
+	<div class="pokemon">
+		
+	</div>
+	<div class="pdex">
+
+	<h1 class="name"></h1>
+
+	<h2 class="types">Types</h2>
+		<ul>	
+		</ul>
+
+	<h2>Height</h2>
+		<p class="height"></p>
+
+	<h2>Weight</h2>
+		<p class="weight"></p>
+
+
+	</div>
+
+
+</body>
+</html>
